@@ -29,7 +29,7 @@ title: dev.p1k.se
        {% for repository in repos %}
             {% unless repository.fork %}
             <li class="inline-block">
-              <span class="post-meta"></span>
+              <span class="post-meta">{{ repository.pushed_at | date: date_format }}</span>
               <h3>
               <a class="align-middle link-primary header-link mr-2"  href="{{repository.html_url}}">{{ repository.name  | escape }}</a>
                 </h3>
