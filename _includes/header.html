@@ -19,7 +19,7 @@
         <div class="trigger">
           {%- for repository in site.github.public_repositories -%}
             {%- if repository.has_pages -%}
-              <a class="page-link"  href="{{repository.html_url}}">{{ repository.name  | escape }}</a>
+              <a class="page-link"  href="/{{repository.name}}">{{ repository.name  | escape }}</a>
             {%- endif -%}
           {%- endfor -%}
           {%- for path in page_paths -%}
