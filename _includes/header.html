@@ -17,6 +17,9 @@
         </label>
 
         <div class="trigger">
+          {%- for repository in site.github.public_repositories | where: "has_pages" -%}
+            <a class="page-link"  href="{{repository.html_url}}">{{ repository.name  | escape }}</a>
+          {%- endfor -%}
           {%- for path in page_paths -%}
             {%- assign page_info = site.pages | where: "path", path | first -%}
             {%- if page_info.title -%}
