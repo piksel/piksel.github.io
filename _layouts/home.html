@@ -28,9 +28,7 @@ title: dev.p1k.se
        {% for target_push in all_pushes limit:8 %}
        {% for repository in site.github.public_repositories %}
             {% assign sane_push = repository.pushed_at | date: "%Y-%m-%d %H:%M" %}
-            {% unless sane_push == target_push %}
-               {% continue %}
-            {% endunless %}
+
             {% unless repository.fork %}
               {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
             <li class="inline-block">
