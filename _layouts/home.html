@@ -22,9 +22,15 @@ title: dev.p1k.se
   {{ content }}
 
   {%- if site.github.public_repositories.size > 0 -%}
+  {% assign all_pushes = site.github.public_repositories | map: "pushed_at" | uniq | date: "%Y-%m-%d %H:%M" | sort %}
     <h2 class="repo-list-heading">{{ page.list_title | default: "Repos" }}</h2>
     <ul class="repo-list">
+       {% for target_push in all_pushes limit:8 %}
        {% for repository in site.github.public_repositories %}
+            {% assign sane_push = repository.pushed_at | date: "%Y-%m-%d %H:%M" %}
+            {% unless sane_push == target_push %}
+               {% continue %}
+            {% endunless %}
             {% unless repository.fork %}
               {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
             <li class="inline-block">
