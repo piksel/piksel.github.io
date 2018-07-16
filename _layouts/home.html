@@ -28,11 +28,14 @@ title: dev.p1k.se
        {% for target_push in all_pushes limit:8 %}
        {% for repository in site.github.public_repositories %}
             {% assign sane_push = repository.pushed_at | date: "%Y-%m-%d %H:%M" %}
-
+            {% unless sane_push == target_push %}
+      <i>{{ target_push }} != {{ sane_push }}</i><br/>
+               {% continue %}
+            {% endunless %}
             {% unless repository.fork %}
               {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
             <li class="inline-block">
-              <span class="post-meta">{{ sane_push }}</span>
+              <span class="post-meta"></span>
               <h3>
               <a class="align-middle link-primary header-link mr-2"  href="{{repository.html_url}}">{{ repository.name  | escape }}</a>
                 </h3>
