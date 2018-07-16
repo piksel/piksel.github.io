@@ -1,68 +1,34 @@
-<!DOCTYPE html>
-<html>
+---
+layout: default
+title: dev.p1k.se
+---
 
-  {% include head.html %}
+<div class="home">
+  {%- if page.title -%}
+    <h1 class="page-heading">{{ page.title }}</h1>
+  {%- endif -%}
 
-  <body>
+  {{ content }}
 
-    <div>
-
-      <header class="header-background">
-
-        <div class="clearfix border-bottom-thick header-border">
-          <ul class="list-reset right py-1 header-text font-smoothing">
-            {% for repository in site.github.public_repositories %}
+  {%- if site.github.public_repositories.size > 0 -%}
+    <h2 class="post-list-heading">{{ page.list_title | default: "Repos" }}</h2>
+    <ul class="post-list">
+       {% for repository in site.github.public_repositories %}
             {% unless repository.fork %}
+              {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
             <li class="inline-block">
-              <a class="align-middle link-primary header-link mr-2"  href="{{repository.html_url}}">{{ repository.name }}</a>
+              <span class="post-meta">{{ post.date | date: date_format }}</span>
+              <h3>
+              <a class="align-middle link-primary header-link mr-2"  href="{{repository.html_url}}">{{ repository.name  | escape }}</a>
+                </h3>
             </li>
-            {% endunless %}
-            {% endfor %}
-            
-          </ul>
-        </div>
+        {% endunless %}
+     {% endfor %}
+    </ul>
 
-        <div class="container mx-auto px-2 mb-2 clearfix header-text">
-          <h1 class="h0 inline-block col-9 sm-width-full py-4 mt-3 header-title">{{ site.title }}</h1>
 
-          <div class="clearfix mb-4 py-1">
-            <div class="col-4 sm-width-full left border-top-thin">
-              <div class="table">
-                <div class="inline-block mt-3 mr-1">
-                  {% include dot-accent.html %}
-                </div>
-                <div class="inline-block mt-3 mr-1">
-                  {% include dot-accent.html %}
-                </div>
-                <div class="inline-block mt-3">
-                  {% include github.html %}
-                </div>
-              </div>
-              <!-- Set site description in config.yml -->
-              <p class="h4 lh-condensed font-smoothing mt-2 py-1">{{ site.description }}</p>
-            </div>
+  {%- endif -%}
 
-            <div class="col-4 sm-width-full left border-top-thin mt-3 mt-lg-0 ml-lg-4 table">
-                <div class="inline-block mt-3 mr-1">
-                  {% include dot.html %}
-                </div>
-                <div class="inline-block mt-3">
-                  {% include {{ site.social_link | default: "twitter" }}.html %}
-                </div>
-            </div>
-          </div>
+</div>
 
-        </div>
-      </header>
 
-      <div class="container mx-auto px-2 py-4">
-
-      </div>
-
-    </div>
-
-    {% include footer.html %}
-
-  </body>
-
-</html>
