@@ -2,7 +2,7 @@
 
   <div class="wrapper">
     <a class="site-title" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
-    {%- if site.is_user_page -%}
+    {%- if site.github.is_user_page -%}
         {%- assign default_paths = site.pages | map: "path" -%}
         {%- assign page_paths = site.header_pages | default: default_paths -%}
     {%- else -%}
