@@ -3,11 +3,11 @@
   <div class="wrapper">
     <a class="site-title" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
     {%- if site.is_user_page -%}
-    {%- assign default_paths = site.pages | map: "path" -%}
-    {%- assign page_paths = site.header_pages | default: default_paths -%}
+        {%- assign default_paths = site.pages | map: "path" -%}
+        {%- assign page_paths = site.header_pages | default: default_paths -%}
     {%- else -%}
-    <span class="site-title"> / </span>
-    <a class="site-title" href="{{ site.url }}">{{ site.title | escape }}</a>
+        <span class="site-title"> / </span>
+        <a class="site-title" href="{{ site.url }}">{{ site.title | escape }}</a>
     {%- endif -%}
 
       <nav class="site-nav">
@@ -33,12 +33,12 @@
                 {%- endif -%}
               {%- endfor -%}
     	{%- else -%}
-            {%- if site.github.latest_release %}
+            {%- if site.github.latest_release -%}
             <a class="page-link" href="{{site.github.latest_release.html_url}}">Download {{site.github.latest_release.tag_name}}</a>
             {%- endif -%}
-            {%- if docs_url %-}
+            {%- if docs_url -%}
             <a class="page-link" href="{{site.url | append: docs_url}}" title="Documentation">Docs</a>
-             %- endif -%}
+            {%- endif -%}
             <a class="page-link" href="{{site.github.zip_url}}">Source (zip)</a>
             <a class="page-link" href="{{site.github.repository_url}}">Github</a>
         {%- endif -%}
