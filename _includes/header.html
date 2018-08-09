@@ -1,11 +1,15 @@
 <header class="site-header" role="banner">
 
   <div class="wrapper">
+    <a class="site-title" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
+    {%- if site.is_user_page -%}
     {%- assign default_paths = site.pages | map: "path" -%}
     {%- assign page_paths = site.header_pages | default: default_paths -%}
-    <a class="site-title" rel="author" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
+    {%- else -%}
+    <span class="site-title"> / </span>
+    <a class="site-title" href="{{ site.url }}">{{ site.title | escape }}</a>
+    {%- endif -%}
 
-    {%- if page_paths -%}
       <nav class="site-nav">
         <input type="checkbox" id="nav-trigger" class="nav-trigger" />
         <label for="nav-trigger">
@@ -15,21 +19,30 @@
             </svg>
           </span>
         </label>
-
         <div class="trigger">
-          {%- for repository in site.github.public_repositories -%}
-            {%- if repository.has_pages -%}
-              <a class="page-link"  href="/{{repository.name}}">{{ repository.name  | escape }}</a>
+        {%- if site.github.is_user_page -%}
+              {%- for repository in site.github.public_repositories -%}
+                {%- if repository.has_pages -%}
+                  <a class="page-link"  href="/{{repository.name}}">{{ repository.name  | escape }}</a>
+                {%- endif -%}
+              {%- endfor -%}
+              {%- for path in page_paths -%}
+                {%- assign page_info = site.pages | where: "path", path | first -%}
+                {%- if page_info.title -%}
+                <a class="page-link" href="{{ page_info.url | relative_url }}">{{ page_info.title | escape }}</a>
+                {%- endif -%}
+              {%- endfor -%}
+    	{%- else -%}
+            {%- if site.github.latest_release %}
+            <a class="page-link" href="{{site.github.latest_release.html_url}}">Download {{site.github.latest_release.tag_name}}</a>
             {%- endif -%}
-          {%- endfor -%}
-          {%- for path in page_paths -%}
-            {%- assign page_info = site.pages | where: "path", path | first -%}
-            {%- if page_info.title -%}
-            <a class="page-link" href="{{ page_info.url | relative_url }}">{{ page_info.title | escape }}</a>
-            {%- endif -%}
-          {%- endfor -%}
+            {%- if docs_url %-}
+            <a class="page-link" href="{{site.url | append: docs_url}}" title="Documentation">Docs</a>
+             %- endif -%}
+            <a class="page-link" href="{{site.github.zip_url}}">Source (zip)</a>
+            <a class="page-link" href="{{site.github.repository_url}}">Github</a>
+        {%- endif -%}
         </div>
-      </nav>
-    {%- endif -%}
+     </nav>
   </div>
 </header>
