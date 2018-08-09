@@ -3,12 +3,3 @@ minimal_mistakes_skin: piksel
 repository: piksel/piksel.github.io
 title: dev.p1k.se
 search: true
-twitter:
-  username: "pikselbitworks"
-defaults:
-  - values:
-      sidebar:
-        - title: "piksel"
-          image: /assets/icon/apple-touch-icon-180x180.png
-          image_alt: "piksel logo"
-          text: "piksel bitworks"
