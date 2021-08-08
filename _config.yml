@@ -3,3 +3,17 @@ minimal_mistakes_skin: piksel
 repository: piksel/piksel.github.io
 title: dev.p1k.se
 search: true
+footer:
+  links:
+    - label: "Twitter"
+      icon: "fab fa-fw fa-twitter-square"
+      url: https://twitter.com/pikselbitworks
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: https://github.com/piksel
+    - label: "GitLab"
+      icon: "fab fa-fw fa-gitlab"
+      url: https://gitlab.com/p1ksel
+    - label: "Bitbucket"
+      icon: "fab fa-fw fa-bitbucket"
+      url: https://bitbucket.org/p1ksel
